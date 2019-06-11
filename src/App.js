@@ -65,7 +65,8 @@ class App extends React.Component {
   {   if(this.state.currentInput == "+"
       ||this.state.currentInput == "-"
       ||this.state.currentInput == "*" 
-      ||this.state.currentInput == "/" )
+      ||this.state.currentInput == "/"
+      ||this.state.currentInput == "." )
         {this.setState({currentInput:""});}
       else
       { let curInpt = this.state["currentInput"];
@@ -105,40 +106,43 @@ const Calculator = (props) => {
   return (
   <div className="App">
       
-    <div id= "display">{props.currentInput}</div>
-    <div id ="numberButtons">
-  
-          <div>
-          <Button relevantFunction = {props.handleInput} value ="1" id ={"one"} text= {"1"} />
+   <div id= "display">{props.currentInput}</div>
+    <div id = "buttonsWrapper">
+   <div className= "row">
+   <Button relevantFunction = {props.handleInput} value ={null} id ={"clear"} text= {"clear"} />
+   <Button relevantFunction = {props.handleInput} value ={null} id ={""} text= {""} />
+   <Button relevantFunction = {props.handleInput} value ={null} id ={""} text= {""} />
+   <Button relevantFunction = {props.handleInput} value ="+" id ={"add"} text= {"+"} />
+  </div>
+   </div>
+   <div className = "row">
+          <Button relevantFunction = {props.handleInput} value ="1" id ={"one"} text= {"1"} />   
           <Button relevantFunction = {props.handleInput} value ="2" id ={"two"} text= {"2"} />
           <Button relevantFunction = {props.handleInput} value ="3" id ={"three"} text= {"3"} />
-          </div>
-          <div>
+          <Button relevantFunction = {props.handleInput} value ="-" id ={"subtract"} text= {"-"} />
+  </div>
+   <div className = "row">
           <Button relevantFunction = {props.handleInput} value ="4" id ={"four"} text= {"4"} />
           <Button relevantFunction = {props.handleInput} value ="5" id ={"five"} text= {"5"} />
           <Button relevantFunction = {props.handleInput} value ="6" id ={"six"} text= {"6"} />
-          </div>  
-          <div>
+          <Button relevantFunction = {props.handleInput} value ="*" id ={"multiply"} text= {"*"} />
+   </div>
+   <div className = "row">
           <Button relevantFunction = {props.handleInput} value ="7" id ={"seven"} text= {"7"} />
           <Button relevantFunction = {props.handleInput} value ="8" id ={"eight"} text= {"8"} />
           <Button relevantFunction = {props.handleInput} value ="9" id ={"nine"} text= {"9"} />
-          </div>
-    </div>
-     
-    
-    <div id ="operatorButtons"> 
-          <Button relevantFunction = {props.handleInput} value ="+" id ={"add"} text= {"+"} />
-          <Button relevantFunction = {props.handleInput} value ="-" id ={"subtract"} text= {"-"} />
-          <Button relevantFunction = {props.handleInput} value ="*" id ={"multiply"} text= {"*"} />
           <Button relevantFunction = {props.handleInput} value ="/" id ={"divide"} text= {"/"} />
-    </div>
-    <div id ="clearDiv">
-      <Button relevantFunction = {props.handleInput} value ={null} id ={"clear"} text= {"clear"} />
-      <Button relevantFunction = {props.handleEqual} value ="=" id ={"equals"} text = {"="}/>
-      <Button relevantFunction = {props.handleInput} value ="." id ={"decimal"} text= {"."} />
-      <Button relevantFunction = {props.handleInput} value ="0" id ={"zero"} text= {"0"} />
-    </div>
-    </div>
+   </div>
+   <div className = "row">
+   <Button relevantFunction = {props.handleInput} value ="0" id ={"zero"} text= {"0"} />
+   <Button relevantFunction = {props.handleInput} value ={"."} id ={"decimal"} text= {"."} />
+   <Button relevantFunction = {props.handleEqual} value ={"="} id ={"equals"} text= {"="} />
+   
+   </div>
+  
+   </div>
+ 
+    
    
   
   );
