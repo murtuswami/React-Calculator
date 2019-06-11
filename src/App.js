@@ -69,6 +69,9 @@ class App extends React.Component {
         {this.setState({currentInput:""});}
       else
       { let curInpt = this.state["currentInput"];
+        if(this.opsArr.includes(curInpt.charAt(curInpt.length-1))){
+          curInpt =  curInpt.slice(0,curInpt.length -1);
+        }
         var result = eval(curInpt);
         if(result % 1 !== 0){result = result.toFixed(4);}
         else{result = result.toString(10);}
@@ -80,34 +83,64 @@ class App extends React.Component {
 
   render (){
   return (
-    <div className="App">
-      
-      <div id= "display2">{this.state.currentInput}</div>
-      <div>
-      <button onClick = {this.handleEqual} id ="equals">=</button>
-      <button onClick = {this.handleInput} value ="0" id ="zero">0</button>
-      <button onClick = {this.handleInput} value = "1" id ="one">1</button>
-      <button onClick = {this.handleInput} value = "2" id ="two">2</button>
-      <button onClick = {this.handleInput} value = "3" id ="three">3</button>
-      <button onClick = {this.handleInput} value = "4" id ="four">4</button>
-      <button onClick = {this.handleInput} value = "5" id ="five">5</button>
-      <button onClick = {this.handleInput} value ="6" id ="six">6</button>
-      <button onClick = {this.handleInput} value = "7"id ="seven">7</button>
-      <button onClick = {this.handleInput} value ="8" id ="eight">8</button>
-      <button onClick = {this.handleInput} value = "9" id ="nine">9</button>
-      </div>
-      <div> 
-      <button onClick = {this.handleInput} value = "+" id ="add">+</button>
-      <button onClick = {this.handleInput} value = "-" id ="subtract">-</button>
-      <button onClick = {this.handleInput} value = "*" id ="multiply">X</button>
-      <button onClick = {this.handleInput} value = "/" id ="divide">/</button>
-      </div>
-
-      <button onClick = {this.handleInput} id ="decimal">.</button>
-      <button onClick = {this.handleInput} id ="clear">clear</button>
+    <header className="App-header">
+    <div id="wrapper">
+    <Calculator 
+    handleEqual ={this.handleEqual} 
+    handleInput={this.handleInput}
+    currentInput ={this.state.currentInput}
+    />
     </div>
+    </header>
   );
   }
 }
+const Button =  (props) => {
+  return(
+  <button onClick = {props.relevantFunction} value = {props.value} id ={props.id}>{props.text}</button>
+  );
+}
 
+const Calculator = (props) => {
+  return (
+  <div className="App">
+      
+    <div id= "display">{props.currentInput}</div>
+    <div id ="numberButtons">
+  
+          <div>
+          <Button relevantFunction = {props.handleInput} value ="1" id ={"one"} text= {"1"} />
+          <Button relevantFunction = {props.handleInput} value ="2" id ={"two"} text= {"2"} />
+          <Button relevantFunction = {props.handleInput} value ="3" id ={"three"} text= {"3"} />
+          </div>
+          <div>
+          <Button relevantFunction = {props.handleInput} value ="4" id ={"four"} text= {"4"} />
+          <Button relevantFunction = {props.handleInput} value ="5" id ={"five"} text= {"5"} />
+          <Button relevantFunction = {props.handleInput} value ="6" id ={"six"} text= {"6"} />
+          </div>  
+          <div>
+          <Button relevantFunction = {props.handleInput} value ="7" id ={"seven"} text= {"7"} />
+          <Button relevantFunction = {props.handleInput} value ="8" id ={"eight"} text= {"8"} />
+          <Button relevantFunction = {props.handleInput} value ="9" id ={"nine"} text= {"9"} />
+          </div>
+    </div>
+     
+    
+    <div id ="operatorButtons"> 
+          <Button relevantFunction = {props.handleInput} value ="+" id ={"add"} text= {"+"} />
+          <Button relevantFunction = {props.handleInput} value ="-" id ={"subtract"} text= {"-"} />
+          <Button relevantFunction = {props.handleInput} value ="*" id ={"multiply"} text= {"*"} />
+          <Button relevantFunction = {props.handleInput} value ="/" id ={"divide"} text= {"/"} />
+    </div>
+    <div id ="clearDiv">
+      <Button relevantFunction = {props.handleInput} value ={null} id ={"clear"} text= {"clear"} />
+      <Button relevantFunction = {props.handleEqual} value ="=" id ={"equals"} text = {"="}/>
+      <Button relevantFunction = {props.handleInput} value ="." id ={"decimal"} text= {"."} />
+      <Button relevantFunction = {props.handleInput} value ="0" id ={"zero"} text= {"0"} />
+    </div>
+    </div>
+   
+  
+  );
+}
 export default App;
